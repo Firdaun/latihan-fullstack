@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Roboto+Slab:wght@100..900&family=Signika+Negative:wght@300..700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-DMSerif: "DM Serif Display", sans-serif;
+  --font-RobotoSlab: "Roboto Slab", sans-serif;
+}
+
+@layer components {
+  .place {
+    @apply w-[90%] max-w-7xl m-auto
+  }
+  .nav {
+    @apply bg-blue-300 backdrop-blur-md fixed right-0 left-0 top-0 z-20 flex rounded-b-2xl py-5
+  }
+}
