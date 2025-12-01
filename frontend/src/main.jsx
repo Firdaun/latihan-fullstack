@@ -3,8 +3,9 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router'
 import './App.css'
 import App from './App.jsx'
-import Contact from './Contact.jsx'
+import Contact from './components/Contact.jsx'
 import Navbar from './Navbar.jsx'
+import About from './components/About.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path='/' element={<App />} />
         <Route path='/contact' element={<Contact/>} />
+        <Route path='/about' element={<About/>} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

@@ -8,7 +8,7 @@ export default function Navbar() {
                 <ul className="flex font-semibold gap-5 items-center">
                     <li><Link to='/'>Home</Link></li>
                     <li><Link to="/contact">Contact</Link></li>
-                    <li><a href="#">About</a></li>
+                    <li><Link to="/about">About</Link></li>
                     <li><a href="#">Course</a></li>
                     <li><a href="#">Blog</a></li>
                 </ul>

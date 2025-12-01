@@ -28,6 +28,7 @@ export default function Apps() {
     return (
         <>
             <HeroSection />
+            <Deskripsi/>
         </>
     )
 }
@@ -114,7 +115,7 @@ function HeroSection() {
     return (
         <>
             <div className="flex flex-col bg-blue-50 items-center justify-center text-center mt-20 gap-5">
-                <h1 className="text-transparent bg-clip-text bg-linear-to-r from-purple-600 via-pink-500 to-yellow-500 text-5xl font-DMSerif py-20">Welcome to our website!</h1>
+                <h1 className="text-transparent bg-clip-text bg-linear-to-r from-purple-600 via-pink-500 to-yellow-500 text-5xl font-DMSerif py-20">Welcome to Fahrul's website!</h1>
             </div>
             <h1 className="place font-semibold text-4xl">Message</h1>
 
@@ -189,4 +190,61 @@ function MessageCard({ title, from, date, createdAt }) {
             </div>
         </div>
     );
+}
+
+function Deskripsi() {
+    return (
+        <>
+            <div className="place px-4 sm:px-6 lg:px-8 py-10">
+            <h2 className="text-4xl font-bold text-center mb-10 text-gray-800">
+                About Fahrul
+            </h2>
+            
+            <section className="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-xl shadow-2xl">
+                <h3 className="text-3xl font-semibold mb-6 border-b-2 pb-2 text-blue-600 flex items-center">
+                    <span role="img" aria-label="globe" className="mr-3">🌐</span> Deskripsi Fitur Pesan
+                </h3>
+                <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+                    Fitur pesan ini dirancang untuk memungkinkan pengunjung website berinteraksi secara langsung dengan meninggalkan komentar, testimoni, atau pesan singkat lainnya, menciptakan nuansa komunitas yang interaktif di halaman utama.
+                </p>
+
+                <h4 className="text-2xl font-bold mb-4 text-gray-800 flex items-center">
+                    <span role="img" aria-label="sparkles" className="mr-2 text-yellow-500">✨</span> Fungsionalitas Utama:
+                </h4>
+                
+                <ul className="space-y-6 text-gray-700">
+                    <li className="flex">
+                        <span className="text-blue-500 font-bold mr-3 mt-1">✓</span>
+                        <div>
+                            <p className="font-semibold text-lg">Pengiriman Pesan (Form Interaktif):</p>
+                            <p>Pengunjung dapat dengan mudah mengirim pesan dengan mengisi Nama dan Isi Pesan melalui formulir input yang intuitif. Sistem akan memvalidasi pesan, memastikan Nama dan Pesan tidak kosong sebelum dikirim.</p>
+                        </div>
+                    </li>
+                    <li className="flex">
+                        <span className="text-blue-500 font-bold mr-3 mt-1">✓</span>
+                        <div>
+                            <p className="font-semibold text-lg">Tampilan Pesan (Embla Carousel):</p>
+                            <p>Pesan yang sudah terkirim akan ditampilkan dalam format kartu (`MessageCard`) yang menarik dan mudah dibaca. Pesan dikelompokkan menjadi slide berisi maksimal 4 pesan per slide, diorganisir menggunakan library Embla Carousel.</p>
+                            <p className="mt-1 text-sm italic text-gray-600">Pengunjung dapat menavigasi pesan menggunakan tombol panah `&lt;` dan `&gt;`. Carousel diatur dalam mode loop sehingga navigasi dapat berputar tanpa akhir.</p>
+                        </div>
+                    </li>
+                    <li className="flex">
+                        <span className="text-blue-500 font-bold mr-3 mt-1">✓</span>
+                        <div>
+                            <p className="font-semibold text-lg">Informasi Detail Pesan:</p>
+                            <p>Setiap kartu pesan menampilkan: Nama Pengirim, Isi Pesan, Tanggal Pesan dalam format lokal (misal: DD/MM/YYYY), dan Waktu Relatif yang diperbarui secara berkala (misal: "Just now", "5 minutes ago").</p>
+                        </div>
+                    </li>
+                    <li className="flex">
+                        <span className="text-blue-500 font-bold mr-3 mt-1">✓</span>
+                        <div>
+                            <p className="font-semibold text-lg">Pengambilan Data Asinkron:</p>
+                            <p>Data pesan diambil dari endpoint secara asinkron (menggunakan `fetchMessages`), memastikan user interface tetap responsif selama proses pemuatan data. Terdapat indikator loading yang akan muncul saat data pesan sedang dimuat.</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+        </>
+    )
 }
