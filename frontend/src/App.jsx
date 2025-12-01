@@ -27,26 +27,8 @@ function formatTimeAgo(timestamp) {
 export default function Apps() {
     return (
         <>
-            <Navbar />
             <HeroSection />
         </>
-    )
-}
-
-function Navbar() {
-    return (
-        <nav className="nav">
-            <div className="place flex justify-between">
-                <h1 className="text-4xl font-bold">Fahrul</h1>
-                <ul className="flex font-semibold gap-5 items-center">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Course</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
-            </div>
-        </nav>
     )
 }
 
