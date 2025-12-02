@@ -4,8 +4,9 @@ import { BrowserRouter, Route, Routes } from 'react-router'
 import './App.css'
 import App from './App.jsx'
 import Contact from './components/Contact.jsx'
-import Navbar from './Navbar.jsx'
+import Navbar from './components/Navbar.jsx'
 import About from './components/About.jsx'
+import Footer from './components/Footer.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -16,6 +17,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/contact' element={<Contact/>} />
         <Route path='/about' element={<About/>} />
       </Routes>
+      <Footer/>
     </BrowserRouter>
   </StrictMode>,
 )

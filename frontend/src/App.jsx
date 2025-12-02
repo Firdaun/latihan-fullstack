@@ -12,10 +12,10 @@ function formatTimeAgo(timestamp) {
 
     if (diffInSeconds < 60) {
         return 'Just now'
-    } else if (diffInSeconds < 3600){
+    } else if (diffInSeconds < 3600) {
         const minutes = Math.floor(diffInSeconds / 60)
         return `${minutes} minute${minutes > 1 ? 's' : ''} ago`
-    } else if(diffInSeconds < 86400){
+    } else if (diffInSeconds < 86400) {
         const hours = Math.floor(diffInSeconds / 3600)
         return `${hours} hour${hours > 1 ? 's' : ''} ago`
     } else {
@@ -28,7 +28,7 @@ export default function Apps() {
     return (
         <>
             <HeroSection />
-            <Deskripsi/>
+            <Deskripsi />
         </>
     )
 }
@@ -158,7 +158,7 @@ function HeroSection() {
                     <div>
                         <textarea className='focus:outline-none resize-none w-full p-4 border-gray-300 border-b-20' placeholder="Masukkan nama" id="input-name" value={newName} onChange={(e) => setNewName(e.target.value)}></textarea>
                     </div>
-                    <textarea className="focus:outline-none w-full p-4 h-full resize-none" placeholder="Masukkan text di sini..." id="input-title" value={newTitle} onChange={(e) => setNewTitle(e.target.value)}></textarea>
+                    <textarea className="focus:outline-none w-full p-4 h-full resize-none" placeholder="Masukkan pesan di sini..." id="input-title" value={newTitle} onChange={(e) => setNewTitle(e.target.value)}></textarea>
                     <button onClick={sendMessage} className="bg-blue-300 hover:cursor-pointer absolute w-15 h-15 right-0 bottom-0 rounded-full flex justify-center items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="#000000" viewBox="0 0 256 256"><path d="M231.87,114l-168-95.89A16,16,0,0,0,40.92,37.34L71.55,128,40.92,218.67A16,16,0,0,0,56,240a16.15,16.15,0,0,0,7.93-2.1l167.92-96.05a16,16,0,0,0,.05-27.89ZM56,224a.56.56,0,0,0,0-.12L85.74,136H144a8,8,0,0,0,0-16H85.74L56.06,32.16A.46.46,0,0,0,56,32l168,95.83Z"></path></svg>
                     </button>
@@ -193,58 +193,64 @@ function MessageCard({ title, from, date, createdAt }) {
 }
 
 function Deskripsi() {
+
+    const components = [
+        {
+            name: 'Pengiriman Pesan (Form Interaktif):',
+            desc: 'Pengunjung dapat dengan mudah mengirim pesan dengan mengisi Nama dan Isi Pesan melalui formulir input yang intuitif. Sistem akan memvalidasi pesan, memastikan Nama dan Pesan tidak kosong sebelum dikirim.'
+        },
+        {
+            name: 'Tampilan Pesan (Embla Carousel):',
+            desc: 'Pesan yang sudah terkirim akan ditampilkan dalam format kartu (`MessageCard`) yang menarik dan mudah dibaca. Pesan dikelompokkan menjadi slide berisi maksimal 4 pesan per slide, diorganisir menggunakan library Embla Carousel.',
+            desc2: (
+                <p className="mt-1 text-sm italic text-gray-600">Pengunjung dapat menavigasi pesan menggunakan tombol panah `&lt;` dan `&gt;`. Carousel diatur dalam mode loop sehingga navigasi dapat berputar tanpa akhir.</p>
+            )
+        },
+        {
+            name: 'Informasi Detail Pesan:',
+            desc: 'Setiap kartu pesan menampilkan: Nama Pengirim, Isi Pesan, Tanggal Pesan dalam format lokal (misal: DD/MM/YYYY), dan Waktu Relatif yang diperbarui secara berkala (misal: "Just now", "5 minutes ago").'
+        },
+        {
+            name: 'Pengambilan Data Asinkron:',
+            desc: 'Data pesan diambil dari endpoint secara asinkron (menggunakan `fetchMessages`), memastikan user interface tetap responsif selama proses pemuatan data. Terdapat indikator loading yang akan muncul saat data pesan sedang dimuat.'
+        },
+    ]
+
     return (
         <>
             <div className="place px-4 sm:px-6 lg:px-8 py-10">
-            <h2 className="text-4xl font-bold text-center mb-10 text-gray-800">
-                About Fahrul
-            </h2>
-            
-            <section className="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-xl shadow-2xl">
-                <h3 className="text-3xl font-semibold mb-6 border-b-2 pb-2 text-blue-600 flex items-center">
-                    <span role="img" aria-label="globe" className="mr-3">🌐</span> Deskripsi Fitur Pesan
-                </h3>
-                <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-                    Fitur pesan ini dirancang untuk memungkinkan pengunjung website berinteraksi secara langsung dengan meninggalkan komentar, testimoni, atau pesan singkat lainnya, menciptakan nuansa komunitas yang interaktif di halaman utama.
-                </p>
+                <h2 className="text-4xl font-bold text-center mb-10 text-gray-800">
+                    About Fahrul
+                </h2>
 
-                <h4 className="text-2xl font-bold mb-4 text-gray-800 flex items-center">
-                    <span role="img" aria-label="sparkles" className="mr-2 text-yellow-500">✨</span> Fungsionalitas Utama:
-                </h4>
-                
-                <ul className="space-y-6 text-gray-700">
-                    <li className="flex">
-                        <span className="text-blue-500 font-bold mr-3 mt-1">✓</span>
-                        <div>
-                            <p className="font-semibold text-lg">Pengiriman Pesan (Form Interaktif):</p>
-                            <p>Pengunjung dapat dengan mudah mengirim pesan dengan mengisi Nama dan Isi Pesan melalui formulir input yang intuitif. Sistem akan memvalidasi pesan, memastikan Nama dan Pesan tidak kosong sebelum dikirim.</p>
-                        </div>
-                    </li>
-                    <li className="flex">
-                        <span className="text-blue-500 font-bold mr-3 mt-1">✓</span>
-                        <div>
-                            <p className="font-semibold text-lg">Tampilan Pesan (Embla Carousel):</p>
-                            <p>Pesan yang sudah terkirim akan ditampilkan dalam format kartu (`MessageCard`) yang menarik dan mudah dibaca. Pesan dikelompokkan menjadi slide berisi maksimal 4 pesan per slide, diorganisir menggunakan library Embla Carousel.</p>
-                            <p className="mt-1 text-sm italic text-gray-600">Pengunjung dapat menavigasi pesan menggunakan tombol panah `&lt;` dan `&gt;`. Carousel diatur dalam mode loop sehingga navigasi dapat berputar tanpa akhir.</p>
-                        </div>
-                    </li>
-                    <li className="flex">
-                        <span className="text-blue-500 font-bold mr-3 mt-1">✓</span>
-                        <div>
-                            <p className="font-semibold text-lg">Informasi Detail Pesan:</p>
-                            <p>Setiap kartu pesan menampilkan: Nama Pengirim, Isi Pesan, Tanggal Pesan dalam format lokal (misal: DD/MM/YYYY), dan Waktu Relatif yang diperbarui secara berkala (misal: "Just now", "5 minutes ago").</p>
-                        </div>
-                    </li>
-                    <li className="flex">
-                        <span className="text-blue-500 font-bold mr-3 mt-1">✓</span>
-                        <div>
-                            <p className="font-semibold text-lg">Pengambilan Data Asinkron:</p>
-                            <p>Data pesan diambil dari endpoint secara asinkron (menggunakan `fetchMessages`), memastikan user interface tetap responsif selama proses pemuatan data. Terdapat indikator loading yang akan muncul saat data pesan sedang dimuat.</p>
-                        </div>
-                    </li>
-                </ul>
-            </section>
-        </div>
+                <section className="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-xl shadow-2xl">
+                    <h3 className="text-3xl font-semibold mb-6 border-b-2 pb-2 text-blue-600 flex items-center">
+                        <span role="img" aria-label="globe" className="mr-3">🌐</span> Deskripsi Fitur Pesan
+                    </h3>
+                    <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+                        Fitur pesan ini dirancang untuk memungkinkan pengunjung website berinteraksi secara langsung dengan meninggalkan komentar, testimoni, atau pesan singkat lainnya, menciptakan nuansa komunitas yang interaktif di halaman utama.
+                    </p>
+
+                    <h4 className="text-2xl font-bold mb-4 text-gray-800 flex items-center">
+                        <span role="img" aria-label="sparkles" className="mr-2 text-yellow-500">✨</span> Fungsionalitas Utama:
+                    </h4>
+
+                    <ul className="text-gray-700 space-y-9">
+                        {components.map((components, index) => {
+                            return (
+                                <li key={index} className="flex">
+                                    <span className="text-blue-500 font-bold mr-3 mt-1">✓</span>
+                                    <div>
+                                        <p className="font-semibold text-lg">{components.name}</p>
+                                        <p>{components.desc}</p>
+                                        {components.desc2}
+                                    </div>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </section>
+            </div>
         </>
     )
 }
