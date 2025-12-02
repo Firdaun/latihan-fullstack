@@ -1,4 +1,4 @@
-import useEmblaCarousel from 'embla-carousel-react'; // <-- Tambahkan ini
+import useEmblaCarousel from 'embla-carousel-react';
 import { useCallback, useEffect, useState } from 'react';
 
 const API_URL = 'http://localhost:3000/messages';
@@ -93,11 +93,9 @@ function HeroSection() {
     }
 
     const groupedMessages = []
-    // Jika data sedang dimuat, tampilkan pesan loading di carousel
     if (isLoading) {
         groupedMessages.push([{ from: "System", title: "Loading messages...", date: new Date().toISOString(), createdAt: new Date().toISOString() }]);
     } else {
-        // Grouping pesan menjadi slide per 4
         for (let i = 0; i < messages.length; i += 4) {
             groupedMessages.push(messages.slice(i, i + 4));
         }
@@ -220,7 +218,7 @@ function Deskripsi() {
         <>
             <div className="place px-4 sm:px-6 lg:px-8 py-10">
                 <h2 className="text-4xl font-bold text-center mb-10 text-gray-800">
-                    About Fahrul
+                    About This Page
                 </h2>
 
                 <section className="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-xl shadow-2xl">
