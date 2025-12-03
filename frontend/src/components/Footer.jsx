@@ -56,7 +56,7 @@ export default function Footer() {
                                 Email: fahrulbrrads@gmail.com
                             </p>
                             <div class="flex">
-                                <a className="text-gray-400 hover:text-white" href="https://x.com/Fahrul7309"><XIcon/></a>
+                                <a className="text-gray-400 hover:text-white" rel="noopener noreferrer" target="_blank" href="https://x.com/Fahrul7309"><XIcon/></a>
                             </div>
                         </div>
                     </div>

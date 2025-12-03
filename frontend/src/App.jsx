@@ -102,7 +102,7 @@ function HeroSection() {
     }
 
     const [emblaRef, emblaApi] = useEmblaCarousel({
-        loop: true,
+        loop: false,
         align: 'start',
     })
 
