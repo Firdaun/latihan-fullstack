@@ -13,7 +13,7 @@ const componentsNav = [
     },
     {
         menu: 'Course',
-        links: '/'
+        links: '/course'
     },
     {
         menu: 'Blog',
