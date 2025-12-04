@@ -8,6 +8,7 @@ import Navbar from './components/Navbar.jsx'
 import About from './components/About.jsx'
 import Footer from './components/Footer.jsx'
 import Course from './components/Course.jsx'
+import Lock from './components/Lock.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -18,8 +19,9 @@ createRoot(document.getElementById('root')).render(
         <Route path='/contact' element={<Contact/>} />
         <Route path='/about' element={<About/>} />
         <Route path='/course' element={<Course embedId="yOIO5h3ENIw" title="Web Dev Course"/>} />
+        <Route path='/lock' element={<Lock/>}/>
       </Routes>
       <Footer/>
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
 )
