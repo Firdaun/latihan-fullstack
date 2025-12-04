@@ -5,10 +5,10 @@ import './App.css'
 import App from './App.jsx'
 import Contact from './components/Contact.jsx'
 import Navbar from './components/Navbar.jsx'
-import About from './components/About.jsx'
 import Footer from './components/Footer.jsx'
 import Course from './components/Course.jsx'
 import Lock from './components/Lock.jsx'
+import ProtectedAbout from './components/ProtectedAbout.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -17,9 +17,10 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path='/' element={<App />} />
         <Route path='/contact' element={<Contact/>} />
-        <Route path='/about' element={<About/>} />
+        <Route path='/about' element={<Lock nextPagePath='/about-unlocked'/>} />
         <Route path='/course' element={<Course embedId="yOIO5h3ENIw" title="Web Dev Course"/>} />
         <Route path='/lock' element={<Lock/>}/>
+        <Route path='/about-unlocked' element={<ProtectedAbout/>} />
       </Routes>
       <Footer/>
     </BrowserRouter>

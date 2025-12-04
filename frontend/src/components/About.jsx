@@ -1,13 +1,14 @@
 export default function About() {
+
     return (
-        <div className="min-h-screen mt-20 py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 flex flex-col items-center">
-            
+        <div className="min-h-screen mt-20 py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 flex flex-col items-center select-none">
+
             <div className="max-w-4xl w-full bg-white p-8 md:p-12 rounded-xl shadow-2xl">
-                
+
                 <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-8 text-center border-b-4 border-indigo-500 pb-3">
                     ✨ About Fahrul
                 </h1>
-                
+
                 <p className="text-base sm:text-lg text-gray-700 leading-relaxed mb-6 border-l-4 border-gray-200 pl-4">
                     Saat pertama kali masuk SMK, Fahrul masih belum memahami apa tujuan hidupnya. Ia masih dalam proses mencari jati diri dan arah masa depannya. Awalnya, Fahrul ingin memilih jurusan TKJ karena merasa jurusan itu lebih sesuai dengan minatnya. Namun, banyak teman dari sekolah lamanya yang juga bersekolah di sana dan sering membully dirinya. Karena takut perundungan itu berlanjut, Fahrul terpaksa memilih jurusan TKR, sebab di jurusan itu ia memiliki lebih banyak teman baru dan berharap bisa memulai lembaran baru.
                 </p>

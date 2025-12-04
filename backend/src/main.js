@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { messageRouter } from './routes/message.route.js';
+import { authRouter } from './routes/auth.route.js';
 
 dotenv.config()
 
@@ -16,7 +17,8 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use('/messages', messageRouter);
+app.use('/messages', messageRouter)
+app.use('/auth', authRouter)
 
 if (process.env.NODE_ENV !== 'test') {
     app.listen(port, () => {
