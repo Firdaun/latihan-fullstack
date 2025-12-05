@@ -1,11 +1,15 @@
 export default function About() {
 
+    const handleRightClick = (e) => {
+        e.preventDefault()
+    }
+
     return (
-        <div className="min-h-screen mt-20 py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 flex flex-col items-center select-none">
+        <div onContextMenu={handleRightClick} className="mt-18 lg:mt-20 py-16 px-0 sm:px-6 lg:px-8 lg:bg-gray-50 flex flex-col items-center select-none">
 
-            <div className="max-w-4xl w-full bg-white p-8 md:p-12 rounded-xl shadow-2xl">
+            <div className="place lg:max-w-4xl bg-white p-0 md:p-12 rounded-xl lg:shadow-2xl">
 
-                <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-8 text-center border-b-4 border-indigo-500 pb-3">
+                <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-8 text-center border-b-4 border-indigo-500 pb-3">
                     ✨ About Fahrul
                 </h1>
 

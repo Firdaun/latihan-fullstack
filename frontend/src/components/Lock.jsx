@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { alertError, alertSuccess } from './data/alert';
 
 const LockIcon = () => (
     <svg
@@ -24,9 +25,11 @@ export default function Lock({ nextPagePath }) {
     const [key, setKey] = useState('');
     const navigate = useNavigate()
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        if (e) e.preventDefault();
+
         if (!key.trim()) {
-            alert('Masukkan secret key terlebih dahulu!');
+            await alertError('Masukkan secret key terlebih dahulu!');
             return;
         }
 
@@ -40,11 +43,11 @@ export default function Lock({ nextPagePath }) {
             });
 
             if (response.ok) {
-                alert('Akses diterima! Selamat datang di halaman About.');
+                await alertSuccess('Akses diterima! Selamat datang di halaman About.');
                 sessionStorage.setItem('is_unlocked_about', 'true');
                 navigate(nextPagePath || '/', { state: { unlocked: true } });
             } else {
-                alert('Key salah. Silakan coba lagi.');
+                await alertError('Key salah. Silakan coba lagi.');
             }
         } catch (error) {
             console.error('Error validating key:', error);
@@ -53,8 +56,8 @@ export default function Lock({ nextPagePath }) {
     }
 
     return (
-        <div className="min-h-screen pt-20 mt-20 flex flex-col items-center bg-blue-50">
-            <div className="w-full max-w-2xl p-6 md:p-10 bg-white shadow-xl rounded-2xl border border-blue-200 transform transition-all duration-500 hover:shadow-2xl hover:shadow-blue-300/50">
+        <div className="min-h-screen pt-20 mt-18 lg:mt-20 flex flex-col items-center lg:bg-blue-50">
+            <form onSubmit={handleSubmit} className="w-full max-w-2xl p-6 md:p-10 bg-white lg:shadow-xl rounded-2xl lg:border border-blue-200 transform transition-all duration-500 hover:shadow-2xl hover:shadow-blue-300/50">
 
                 <div className="text-center mb-10">
                     <span className="inline-block bg-sky-100 text-sky-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4 border border-sky-300">
@@ -62,12 +65,12 @@ export default function Lock({ nextPagePath }) {
                     </span>
 
                     <h1
-                        className="text-5xl md:text-6xl font-extrabold tracking-tight mb-4 leading-tight bg-clip-text text-transparent bg-linear-to-r from-sky-500 to-cyan-500 transition-colors duration-500"
+                        className="text-4xl lg:text-5xl md:text-6xl font-extrabold tracking-tight mb-4 leading-tight bg-clip-text text-transparent bg-linear-to-r from-sky-500 to-cyan-500 transition-colors duration-500"
                     >
                         Halaman Di Kunci
                     </h1>
 
-                    <h2 className="text-xl md:text-2xl text-gray-700 font-medium">
+                    <h2 className="text-lg lg:text-xl md:text-2xl text-gray-700 font-medium">
                         Masukkan secret key di bawah ini untuk melanjutkan
                     </h2>
                 </div>
@@ -83,8 +86,7 @@ export default function Lock({ nextPagePath }) {
                             className="grow p-4 text-base md:text-lg focus:outline-none bg-white text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-sky-500 transition duration-300" />
 
                         <button
-                            type="button"
-                            onClick={handleSubmit}
+                            type="submit"
                             className="group flex items-center justify-center bg-sky-500 hover:bg-sky-600 text-white p-4 transition duration-300 ease-in-out transform"
                             title="Buka Kunci Akses"
                         >
@@ -92,7 +94,7 @@ export default function Lock({ nextPagePath }) {
                         </button>
                     </div>
                 </div>
-            </div>
+            </form>
 
             <p className="mt-8 text-gray-500 text-sm">
                 Hubungi administrator jika Anda memerlukan kunci.

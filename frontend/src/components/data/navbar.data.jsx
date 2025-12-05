@@ -17,7 +17,7 @@ const componentsNav = [
     },
     {
         menu: 'Blog',
-        links: '/'
+        links: '/blog'
     },
 ]
 
