@@ -9,7 +9,7 @@ async function validateKey(req, res) {
     await new Promise(resolve => setTimeout(resolve, 300)); 
 
     if (!key || key !== SECRET_KEY) {
-        console.warn(`Percobaan akses dengan kunci salah: ${key}`);
+        console.warn(`Percobaan masuk salah: ${key}`);
         return res.status(403).json({ success: false, message: 'Kunci salah atau tidak valid.' });
     }
 
