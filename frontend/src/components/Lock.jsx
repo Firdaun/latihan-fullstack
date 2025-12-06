@@ -19,7 +19,7 @@ const LockIcon = () => (
     </svg>
 );
 
-const AUTH_API_URL = 'http://localhost:3000/auth/validate-key';
+const AUTH_API_URL = import.meta.env.VITE_API_URL + '/auth/validate-key';
 
 export default function Lock({ nextPagePath }) {
     const [key, setKey] = useState('');

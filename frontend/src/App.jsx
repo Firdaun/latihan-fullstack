@@ -2,7 +2,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { alertError } from './components/data/alert'
 
-const API_URL = 'http://localhost:3000/messages'
+const API_URL = import.meta.env.VITE_API_URL + '/messages';
 
 function formatTimeAgo(timestamp) {
     if (!timestamp) return 'Just now'
