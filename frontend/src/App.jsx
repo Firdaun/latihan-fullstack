@@ -196,7 +196,7 @@ function HeroSection() {
                         <textarea onKeyDown={handleNameKeyDown} ref={nameInputRef} className='focus:outline-none resize-none w-full p-4 border-gray-300 border-y-8 lg:border-b-20' placeholder="Masukkan nama" id="input-name" value={newName} onChange={(e) => setNewName(e.target.value)}></textarea>
                     </div>
                     <textarea onKeyDown={handleMessageKeyDown} ref={messageInputRef} className="focus:outline-none w-full p-4 h-50 resize-none" placeholder="Masukkan pesan di sini..." id="input-title" value={newTitle} onChange={(e) => setNewTitle(e.target.value)}></textarea>
-                    <button onClick={sendMessage} className="bg-blue-300 hover:cursor-pointer absolute w-15 h-15 right-0 bottom-0 rounded-full flex justify-center items-center">
+                    <button onClick={sendMessage} className="bg-blue-300 transition-transform duration-150 active:scale-90 hover:shadow-lg hover:cursor-pointer absolute w-15 h-15 right-0 bottom-0 rounded-full flex justify-center items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="#000000" viewBox="0 0 256 256"><path d="M231.87,114l-168-95.89A16,16,0,0,0,40.92,37.34L71.55,128,40.92,218.67A16,16,0,0,0,56,240a16.15,16.15,0,0,0,7.93-2.1l167.92-96.05a16,16,0,0,0,.05-27.89ZM56,224a.56.56,0,0,0,0-.12L85.74,136H144a8,8,0,0,0,0-16H85.74L56.06,32.16A.46.46,0,0,0,56,32l168,95.83Z"></path></svg>
                     </button>
                 </div>
