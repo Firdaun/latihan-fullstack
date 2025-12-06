@@ -20,9 +20,9 @@ async function postMessage(req, res) {
     try {
         const count = await messageService.getGlobalMessageCountToday()
 
-        if (count >= 10) {
+        if (count >= 50) {
             return res.status(429).json({
-                error: 'Kuota pesan harian penuh (Max 10 pesan/hari untuk website ini). Silakan coba lagi besok.'
+                error: 'Pesan sudah mencapai limit. Silakan coba lagi besok.'
             })
         }
 
