@@ -1,7 +1,8 @@
-import useEmblaCarousel from 'embla-carousel-react';
-import { useCallback, useEffect, useState } from 'react';
+import useEmblaCarousel from 'embla-carousel-react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { alertError } from './components/data/alert'
 
-const API_URL = 'http://localhost:3000/messages';
+const API_URL = 'http://localhost:3000/messages'
 
 function formatTimeAgo(timestamp) {
     if (!timestamp) return 'Just now'
@@ -34,11 +35,13 @@ export default function Apps() {
 }
 
 function HeroSection() {
-    const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState([])
     const [newName, setNewName] = useState('')
     const [newTitle, setNewTitle] = useState('')
     const [isLoading, setIsLoading] = useState(true)
-    const [itemsPerGroup, setItemsPerGroup] = useState(4);
+    const [itemsPerGroup, setItemsPerGroup] = useState(4)
+    const messageInputRef = useRef(null)
+    const nameInputRef = useRef(null)
 
     useEffect(() => {
         const handleResize = () => {
@@ -78,7 +81,7 @@ function HeroSection() {
 
     const sendMessage = async () => {
         if (!newName.trim() || !newTitle.trim()) {
-            alert('Nama dan pesan tidak boleh kosong!')
+            alertError('Nama dan pesan tidak boleh kosong!')
             return
         }
 
@@ -100,12 +103,33 @@ function HeroSection() {
                 setMessages(prevMessages => [savedMessage, ...prevMessages])
                 setNewName('')
                 setNewTitle('')
+                nameInputRef.current?.focus()
             } else {
-                alert('Failed to send message.')
+                const errorData = await response.json()
+                alertError(errorData.error || 'Failed to send message.')
             }
         } catch (error) {
-            console.error('Error sending message:', error);
-            alert('A network connection error occurred.')
+            console.error('Error sending message:', error)
+            alertError('A network connection error occurred.')
+        }
+    }
+
+    const handleNameKeyDown = (e) => {
+        if(e.key === 'Enter' || e.key === 'ArrowDown'){
+            e.preventDefault()
+            messageInputRef.current?.focus()
+        }
+    }
+
+    const handleMessageKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault()
+            sendMessage()
+        }
+
+        if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            nameInputRef.current?.focus()
         }
     }
 
@@ -114,7 +138,7 @@ function HeroSection() {
         groupedMessages.push([{ from: "System", title: "Loading messages...", date: new Date().toISOString(), createdAt: new Date().toISOString() }]);
     } else {
         for (let i = 0; i < messages.length; i += itemsPerGroup) {
-            groupedMessages.push(messages.slice(i, i + itemsPerGroup));
+            groupedMessages.push(messages.slice(i, i + itemsPerGroup))
         }
     }
 
@@ -169,9 +193,9 @@ function HeroSection() {
 
                 <div className="relative wrap-break-word lg:border-l-20 border-gray-300 lg:w-1/3">
                     <div>
-                        <textarea className='focus:outline-none resize-none w-full p-4 border-gray-300 border-y-8 lg:border-b-20' placeholder="Masukkan nama" id="input-name" value={newName} onChange={(e) => setNewName(e.target.value)}></textarea>
+                        <textarea onKeyDown={handleNameKeyDown} ref={nameInputRef} className='focus:outline-none resize-none w-full p-4 border-gray-300 border-y-8 lg:border-b-20' placeholder="Masukkan nama" id="input-name" value={newName} onChange={(e) => setNewName(e.target.value)}></textarea>
                     </div>
-                    <textarea className="focus:outline-none w-full p-4 h-50 resize-none" placeholder="Masukkan pesan di sini..." id="input-title" value={newTitle} onChange={(e) => setNewTitle(e.target.value)}></textarea>
+                    <textarea onKeyDown={handleMessageKeyDown} ref={messageInputRef} className="focus:outline-none w-full p-4 h-50 resize-none" placeholder="Masukkan pesan di sini..." id="input-title" value={newTitle} onChange={(e) => setNewTitle(e.target.value)}></textarea>
                     <button onClick={sendMessage} className="bg-blue-300 hover:cursor-pointer absolute w-15 h-15 right-0 bottom-0 rounded-full flex justify-center items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="#000000" viewBox="0 0 256 256"><path d="M231.87,114l-168-95.89A16,16,0,0,0,40.92,37.34L71.55,128,40.92,218.67A16,16,0,0,0,56,240a16.15,16.15,0,0,0,7.93-2.1l167.92-96.05a16,16,0,0,0,.05-27.89ZM56,224a.56.56,0,0,0,0-.12L85.74,136H144a8,8,0,0,0,0-16H85.74L56.06,32.16A.46.46,0,0,0,56,32l168,95.83Z"></path></svg>
                     </button>

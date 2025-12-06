@@ -22,6 +22,19 @@ async function getAllMessages() {
     })
 }
 
+async function getGlobalMessageCountToday() {
+    const startOfDay = new Date()
+    startOfDay.setHours(0, 0, 0, 0)
+
+    return prisma.message.count({
+        where: {
+            createdAt: {
+                gte: startOfDay
+            }
+        }
+    })
+}
+
 async function createNewMessage(from, title) {
     return prisma.message.create({
         data: {
@@ -33,7 +46,8 @@ async function createNewMessage(from, title) {
 
 export const messageService = {
     getAllMessages,
-    createNewMessage
+    createNewMessage,
+    getGlobalMessageCountToday
 }
 
 export const db = prisma;

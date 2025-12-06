@@ -18,6 +18,14 @@ async function postMessage(req, res) {
     }
 
     try {
+        const count = await messageService.getGlobalMessageCountToday()
+
+        if (count >= 10) {
+            return res.status(429).json({
+                error: 'Kuota pesan harian penuh (Max 10 pesan/hari untuk website ini). Silakan coba lagi besok.'
+            })
+        }
+
         const newMessage = await messageService.createNewMessage(from, title)
         res.status(201).json(newMessage)
     } catch (error) {

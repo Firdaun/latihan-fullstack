@@ -51,7 +51,7 @@ export default function Lock({ nextPagePath }) {
             }
         } catch (error) {
             console.error('Error validating key:', error);
-            alert('Terjadi kesalahan jaringan. Cek status server backend Anda.');
+            alertError('Terjadi kesalahan jaringan. Cek status server backend Anda.');
         }
     }
 
