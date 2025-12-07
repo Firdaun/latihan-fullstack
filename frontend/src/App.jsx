@@ -38,6 +38,7 @@ function HeroSection() {
     const [messages, setMessages] = useState([])
     const [newName, setNewName] = useState('')
     const [newTitle, setNewTitle] = useState('')
+    const [isSending, setIsSending] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [itemsPerGroup, setItemsPerGroup] = useState(4)
     const messageInputRef = useRef(null)
@@ -45,7 +46,7 @@ function HeroSection() {
 
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth < 1024) {
+            if (window.innerWidth < 768) {
                 setItemsPerGroup(2)
             } else {
                 setItemsPerGroup(4)
@@ -85,6 +86,8 @@ function HeroSection() {
             return
         }
 
+        setIsSending(true)
+
         const messageData = {
             from: newName.trim(),
             title: newTitle.trim(),
@@ -111,6 +114,8 @@ function HeroSection() {
         } catch (error) {
             console.error('Error sending message:', error)
             alertError('A network connection error occurred.')
+        } finally {
+            setIsSending(false)
         }
     }
 
@@ -153,10 +158,10 @@ function HeroSection() {
 
     return (
         <>
-            <div className="flex flex-col bg-blue-50 items-center justify-center text-center pt-18 lg:pt-20 gap-5">
-                <h1 className="text-transparent bg-clip-text bg-linear-to-r from-purple-600 via-pink-500 to-yellow-500 text-4xl lg:text-5xl font-DMSerif py-20">Welcome to Fahrul's website!</h1>
+            <div className="flex flex-col bg-blue-50 items-center justify-center text-center pt-18 md:pt-20 gap-5">
+                <h1 className="text-transparent bg-clip-text bg-linear-to-r from-purple-600 via-pink-500 to-yellow-500 text-4xl md:text-5xl font-DMSerif py-20">Welcome to Fahrul's website!</h1>
             </div>
-            <h1 className="place font-semibold text-2xl lg:text-4xl">Message</h1>
+            <h1 className="place font-semibold text-2xl md:text-4xl">Message</h1>
             <div className="lg:h-125 place flex flex-col lg:flex-row border-8 lg:border-20 border-gray-300 rounded-xl mt-5">
                 <div className="relative lg:w-10/12">
                     <div className='overflow-hidden h-full' ref={emblaRef}>
@@ -167,7 +172,7 @@ function HeroSection() {
                                 </div>
                             ) : (groupedMessages.map((slideGroup, slideIndex) => (
                                 <div key={slideIndex} className='shrink-0 grow-0 basis-full py-5 px-7 min-w-0'>
-                                    <div className="grid lg:grid-cols-2 gap-5 h-full">
+                                    <div className="grid md:grid-cols-2 gap-5 h-full">
                                         {slideGroup.map((message, messageIndex) => (
                                             <MessageCard
                                                 key={message.id || messageIndex}
@@ -193,11 +198,19 @@ function HeroSection() {
 
                 <div className="relative wrap-break-word lg:border-l-20 border-gray-300 lg:w-1/3">
                     <div>
-                        <textarea onKeyDown={handleNameKeyDown} ref={nameInputRef} className='focus:outline-none resize-none w-full p-4 border-gray-300 border-y-8 lg:border-b-20' placeholder="Masukkan nama" id="input-name" value={newName} onChange={(e) => setNewName(e.target.value)}></textarea>
+                        <textarea onKeyDown={handleNameKeyDown} ref={nameInputRef} className='focus:outline-none resize-none w-full p-4 border-gray-300 lg:border-y-0 border-y-8 lg:border-b-20' placeholder="Masukkan nama" id="input-name" value={newName} onChange={(e) => setNewName(e.target.value)}></textarea>
                     </div>
                     <textarea onKeyDown={handleMessageKeyDown} ref={messageInputRef} className="focus:outline-none w-full p-4 h-50 resize-none" placeholder="Masukkan pesan di sini..." id="input-title" value={newTitle} onChange={(e) => setNewTitle(e.target.value)}></textarea>
-                    <button onClick={sendMessage} className="bg-blue-300 transition-transform duration-150 active:scale-90 hover:shadow-lg hover:cursor-pointer absolute w-15 h-15 right-0 bottom-0 rounded-full flex justify-center items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="#000000" viewBox="0 0 256 256"><path d="M231.87,114l-168-95.89A16,16,0,0,0,40.92,37.34L71.55,128,40.92,218.67A16,16,0,0,0,56,240a16.15,16.15,0,0,0,7.93-2.1l167.92-96.05a16,16,0,0,0,.05-27.89ZM56,224a.56.56,0,0,0,0-.12L85.74,136H144a8,8,0,0,0,0-16H85.74L56.06,32.16A.46.46,0,0,0,56,32l168,95.83Z"></path></svg>
+                    <button disabled={isSending} onClick={sendMessage} className={`${isSending ? 'opacity-80 bg-blue-300 cursor-not-allowed' : 'bg-blue-300 active:scale-90 hover:shadow-lg hover:cursor-pointer'} transition-transform duration-150 absolute w-15 h-15 right-0 bottom-0 rounded-full flex justify-center items-center`}>
+                        {isSending ? (
+                            <svg className="animate-spin h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        ) : (
+                            <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="#000000" viewBox="0 0 256 256"><path d="M231.87,114l-168-95.89A16,16,0,0,0,40.92,37.34L71.55,128,40.92,218.67A16,16,0,0,0,56,240a16.15,16.15,0,0,0,7.93-2.1l167.92-96.05a16,16,0,0,0,.05-27.89ZM56,224a.56.56,0,0,0,0-.12L85.74,136H144a8,8,0,0,0,0-16H85.74L56.06,32.16A.46.46,0,0,0,56,32l168,95.83Z"></path></svg>
+
+                        )}
                     </button>
                 </div>
             </div>
@@ -261,14 +274,14 @@ function Deskripsi() {
                 </h2>
 
                 <section className="lg:w-4xl lg:mx-auto bg-white lg:p-10 rounded-xl lg:shadow-2xl">
-                    <h3 className="text-2xl lg:text-3xl font-semibold mb-6 border-b-2 pb-2 text-blue-600 flex items-center">
+                    <h3 className="text-lg md:text-2xl lg:text-3xl font-semibold mb-6 border-b-2 pb-2 text-blue-600 flex items-center">
                         <span role="img" aria-label="globe" className="mr-3">🌐</span> Deskripsi Fitur Pesan
                     </h3>
-                    <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+                    <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed">
                         Fitur pesan ini dirancang untuk memungkinkan pengunjung website berinteraksi secara langsung dengan meninggalkan komentar, testimoni, atau pesan singkat lainnya, menciptakan nuansa komunitas yang interaktif di halaman utama.
                     </p>
 
-                    <h4 className="text-2xl font-bold mb-4 text-gray-800 flex items-center">
+                    <h4 className="text-lg md:text-2xl font-bold mb-4 text-gray-800 flex items-center">
                         <span role="img" aria-label="sparkles" className="mr-2 text-yellow-500">✨</span> Fungsionalitas Utama:
                     </h4>
 
@@ -278,7 +291,7 @@ function Deskripsi() {
                                 <li key={index} className="flex">
                                     <span className="text-blue-500 font-bold mr-3 mt-1">✓</span>
                                     <div>
-                                        <p className="font-semibold text-lg">{components.name}</p>
+                                        <p className="font-semibold text-base">{components.name}</p>
                                         <p>{components.desc}</p>
                                         {components.desc2}
                                     </div>

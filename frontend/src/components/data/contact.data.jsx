@@ -26,7 +26,7 @@ const contactComponents = [
     },
     {
         name: 'WhatsApp',
-        text: '+628960447555 Respon Cepat',
+        text: '+628960447555 Respon Cepattttt',
         href: 'https://wa.me/+628960447555',
         icon: WhatsappIcon,
         linkTextClass: 'text-green-500 hover:text-green-700'

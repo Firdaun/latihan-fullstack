@@ -56,8 +56,8 @@ export default function Lock({ nextPagePath }) {
     }
 
     return (
-        <div className="min-h-screen pt-20 mt-18 lg:mt-20 flex flex-col items-center lg:bg-blue-50">
-            <form onSubmit={handleSubmit} className="w-full max-w-2xl p-6 md:p-10 bg-white lg:shadow-xl rounded-2xl lg:border border-blue-200 transform transition-all duration-500 hover:shadow-2xl hover:shadow-blue-300/50">
+        <div className="min-h-screen pt-20 mt-18 lg:mt-20 flex flex-col items-center">
+            <form onSubmit={handleSubmit} className="w-full max-w-2xl p-6 md:p-10  md:shadow-xl rounded-2xl md:border border-blue-200 transform transition-all duration-500 md:hover:shadow-2xl hover:shadow-blue-300/50">
 
                 <div className="text-center mb-10">
                     <span className="inline-block bg-sky-100 text-sky-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4 border border-sky-300">
@@ -65,12 +65,12 @@ export default function Lock({ nextPagePath }) {
                     </span>
 
                     <h1
-                        className="text-4xl lg:text-5xl md:text-6xl font-extrabold tracking-tight mb-4 leading-tight bg-clip-text text-transparent bg-linear-to-r from-sky-500 to-cyan-500 transition-colors duration-500"
+                        className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 leading-tight bg-clip-text text-transparent bg-linear-to-r from-sky-500 to-cyan-500 transition-colors duration-500"
                     >
                         Halaman Di Kunci
                     </h1>
 
-                    <h2 className="text-lg lg:text-xl md:text-2xl text-gray-700 font-medium">
+                    <h2 className="md:text-lg lg:text-xl text-gray-700 font-medium">
                         Masukkan secret key di bawah ini untuk melanjutkan
                     </h2>
                 </div>

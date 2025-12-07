@@ -5,17 +5,17 @@ import { Link } from "react-router";
 export default function Blog() {
     return (
         <div className="min-h-screen lg:mt-20 flex flex-col items-center justify-center lg:bg-gray-50">
-            <div className="w-full max-w-4xl p-10 md:p-16 text-center bg-white lg:shadow-2xl rounded-3xl lg:border-4 border-sky-400/50 transform transition-all duration-500 hover:scale-[1.01]">
+            <div className="w-full max-w-4xl p-3 md:p-16 text-center bg-white lg:shadow-2xl rounded-3xl lg:border-4 border-sky-400/50 transform transition-all duration-500 hover:scale-[1.01]">
 
                 <span className="inline-block text-7xl mb-6" role="img" aria-label="construction">🚧</span>
 
                 <h1
-                    className="text-5xl lg:text-7xl md:text-8xl font-extrabold tracking-tight mb-4 leading-tight bg-clip-text text-transparent bg-linear-to-r from-sky-600 to-blue-800"
+                    className="text-5xl lg:text-7xl md:text-8xl font-extrabold tracking-tight mb-3 leading-tight bg-clip-text text-transparent bg-linear-to-r from-sky-600 to-blue-800"
                 >
                     BLOG
                 </h1>
 
-                <h2 className="text-xl lg:text-3xl md:text-4xl text-gray-700 font-semibold mb-6">
+                <h2 className="text-lg md:text-3xl text-gray-700 font-semibold">
                     Halaman ini sedang dalam pengerjaan.
                 </h2>
 
