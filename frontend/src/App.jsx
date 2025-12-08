@@ -161,7 +161,7 @@ function HeroSection() {
             <div className="flex flex-col bg-blue-50 items-center justify-center text-center pt-18 md:pt-20 gap-5">
                 <h1 className="text-transparent bg-clip-text bg-linear-to-r from-purple-600 via-pink-500 to-yellow-500 text-4xl md:text-5xl font-DMSerif py-20">Welcome to Fahrul's website!</h1>
             </div>
-            <h1 className="place font-semibold text-2xl md:text-4xl">Message</h1>
+            <h1 className="place mt-5 font-semibold text-2xl md:text-4xl">Message</h1>
             <div className="lg:h-125 place flex flex-col lg:flex-row border-8 lg:border-20 border-gray-300 rounded-xl mt-5">
                 <div className="relative lg:w-10/12">
                     <div className='overflow-hidden h-full' ref={emblaRef}>

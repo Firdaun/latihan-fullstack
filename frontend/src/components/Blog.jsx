@@ -1,37 +1,36 @@
-// src/components/Blog.jsx
+// frontend/src/components/Blog.jsx
 
-import { Link } from "react-router";
+import { Link, Outlet, useRoutes } from 'react-router'; // Perlu ganti import 'react-router' ke 'react-router-dom' di main.jsx dan package.json
 
+// Komponen untuk Halaman Daftar Artikel (List of Posts)
+function PostList() {
+    // Logika fetch data artikel dari backend dan menampilkannya di sini
+    // ...
+    return (
+        <div className="min-h-screen lg:mt-20 flex flex-col items-center p-3 md:p-16">
+            <h1 className="text-5xl font-extrabold text-gray-900 mb-8">Fahrul's Blog</h1>
+            {/* Tampilkan daftar artikel di sini */}
+            <Link to="/blog/contoh-artikel-1">Baca Artikel Pertama</Link>
+        </div>
+    )
+}
+
+// Komponen untuk Halaman Detail Artikel (Single Post)
+function SinglePost() {
+    // Logika mengambil artikel berdasarkan slug dari URL dan menampilkannya
+    // ...
+    return (
+        <div className="min-h-screen lg:mt-20 flex flex-col items-center p-3 md:p-16">
+            <h1 className="text-4xl font-bold">Judul Artikel</h1>
+            <p>Konten artikel...</p>
+        </div>
+    )
+}
+
+// Komponen utama Blog.jsx
 export default function Blog() {
     return (
-        <div className="min-h-screen lg:mt-20 flex flex-col items-center justify-center lg:bg-gray-50">
-            <div className="w-full max-w-4xl p-3 md:p-16 text-center bg-white lg:shadow-2xl rounded-3xl lg:border-4 border-sky-400/50 transform transition-all duration-500 hover:scale-[1.01]">
-
-                <span className="inline-block text-7xl mb-6" role="img" aria-label="construction">🚧</span>
-
-                <h1
-                    className="text-5xl lg:text-7xl md:text-8xl font-extrabold tracking-tight mb-3 leading-tight bg-clip-text text-transparent bg-linear-to-r from-sky-600 to-blue-800"
-                >
-                    BLOG
-                </h1>
-
-                <h2 className="text-lg md:text-3xl text-gray-700 font-semibold">
-                    Halaman ini sedang dalam pengerjaan.
-                </h2>
-
-                <p className="text-base lg:text-xl text-gray-500 mt-4">
-                    Nantikan tulisan, artikel, dan pembaruan terbaru dari Fahrul!
-                </p>
-
-                <div className="mt-10">
-                    <Link
-                        to="/"
-                        className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-blue-500 hover:bg-blue-600 transition duration-300 transform hover:scale-105"
-                    >
-                        Kembali ke Beranda
-                    </Link>
-                </div>
-            </div>
-        </div>
-    );
+        // Gunakan PostList atau SinglePost di sini, tergantung route
+        <PostList /> // Atau gunakan React Router untuk switch antar list dan detail
+    )
 }
