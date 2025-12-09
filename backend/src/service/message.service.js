@@ -18,7 +18,7 @@ const adapter = new PrismaMariaDb({
 const prisma = new PrismaClient({ adapter });
 
 async function getAllMessages() {
-    return prisma.message.findMany({
+    return prisma.messages.findMany({
         orderBy: {
             createdAt: 'desc',
         }
@@ -29,7 +29,7 @@ async function getGlobalMessageCountToday() {
     const startOfDay = new Date()
     startOfDay.setHours(0, 0, 0, 0)
 
-    return prisma.message.count({
+    return prisma.messages.count({
         where: {
             createdAt: {
                 gte: startOfDay
@@ -39,7 +39,7 @@ async function getGlobalMessageCountToday() {
 }
 
 async function createNewMessage(from, title) {
-    return prisma.message.create({
+    return prisma.messages.create({
         data: {
             from,
             title,
