@@ -1,4 +1,4 @@
-import { contactComponents } from "./data/contact.data";
+import { contactComponents } from "./data/contact.data"
 
 export default function Contact() {
 

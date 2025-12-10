@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router';
-import { alertError, alertSuccess } from './data/alert';
+import { useState } from 'react'
+import { useNavigate } from 'react-router'
+import { alertError, alertSuccess } from './data/alert'
 
 const LockIcon = () => (
     <svg
@@ -17,20 +17,20 @@ const LockIcon = () => (
         <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
         <path d="M7 11V7a5 5 0 0 1 10 0v4" />
     </svg>
-);
+)
 
-const AUTH_API_URL = import.meta.env.VITE_API_URL + '/auth/validate-key';
+const AUTH_API_URL = import.meta.env.VITE_API_URL + '/auth/validate-key'
 
 export default function Lock({ nextPagePath }) {
-    const [key, setKey] = useState('');
+    const [key, setKey] = useState('')
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
-        if (e) e.preventDefault();
+        if (e) e.preventDefault()
 
         if (!key.trim()) {
-            await alertError('Masukkan secret key terlebih dahulu!');
-            return;
+            await alertError('Masukkan secret key terlebih dahulu!')
+            return
         }
 
         try {
@@ -40,18 +40,18 @@ export default function Lock({ nextPagePath }) {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ key: key }),
-            });
+            })
 
             if (response.ok) {
-                await alertSuccess('Akses diterima! Selamat datang di halaman About.');
-                sessionStorage.setItem('is_unlocked_about', 'true');
-                navigate(nextPagePath || '/', { state: { unlocked: true } });
+                await alertSuccess('Akses diterima! Selamat datang di halaman About.')
+                sessionStorage.setItem('is_unlocked_about', 'true')
+                navigate(nextPagePath || '/', { state: { unlocked: true } })
             } else {
-                await alertError('Key salah. Silakan coba lagi.');
+                await alertError('Key salah. Silakan coba lagi.')
             }
         } catch (error) {
-            console.error('Error validating key:', error);
-            alertError('Terjadi kesalahan jaringan. Cek status server backend Anda.');
+            console.error('Error validating key:', error)
+            alertError('Terjadi kesalahan jaringan. Cek status server backend Anda.')
         }
     }
 

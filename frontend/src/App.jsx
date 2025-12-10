@@ -2,7 +2,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { alertError } from './components/data/alert'
 
-const API_URL = import.meta.env.VITE_API_URL + '/messages';
+const API_URL = import.meta.env.VITE_API_URL + '/messages'
 
 function formatTimeAgo(timestamp) {
     if (!timestamp) return 'Just now'
@@ -133,14 +133,14 @@ function HeroSection() {
         }
 
         if (e.key === 'ArrowUp') {
-            e.preventDefault();
+            e.preventDefault()
             nameInputRef.current?.focus()
         }
     }
 
     const groupedMessages = []
     if (isLoading) {
-        groupedMessages.push([{ from: "System", title: "Loading messages...", date: new Date().toISOString(), createdAt: new Date().toISOString() }]);
+        groupedMessages.push([{ from: "System", title: "Loading messages...", date: new Date().toISOString(), createdAt: new Date().toISOString() }])
     } else {
         for (let i = 0; i < messages.length; i += itemsPerGroup) {
             groupedMessages.push(messages.slice(i, i + itemsPerGroup))
@@ -239,7 +239,7 @@ function MessageCard({ title, from, date, createdAt }) {
                 <p>{timeAgoText}</p>
             </div>
         </div>
-    );
+    )
 }
 
 function Deskripsi() {

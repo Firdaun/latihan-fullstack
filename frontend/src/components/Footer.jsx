@@ -1,12 +1,12 @@
-import { useLocation } from "react-router";
-import { componentsFooter, XIcon } from "./data/footer.data";
+import { useLocation } from "react-router"
+import { componentsFooter, XIcon } from "./data/footer.data"
 
 export default function Footer() {
     const location = useLocation()
 
     const handleRightClick = (e) => {
         if (location.pathname === '/about-unlocked') {
-            e.preventDefault();
+            e.preventDefault()
         }
     }
 

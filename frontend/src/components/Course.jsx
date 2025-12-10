@@ -13,7 +13,7 @@ export default function Course({ embedId, title }) {
                 <iframe
                     title={title || "Embedded YouTube Video"}
                     src={srcUrl}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allow="accelerometer autoplay clipboard-write encrypted-media gyroscope picture-in-picture"
                     allowFullScreen
                     className="absolute top-0 left-0 w-full h-full"
                 />
