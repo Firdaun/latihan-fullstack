@@ -44,8 +44,10 @@ export default function ProtectedAbout() {
                 body: JSON.stringify({ key: key }),
             })
 
+            const data = await response.json()
+
             if (response.ok) {
-                await alertSuccess('Akses diterima! Selamat datang.')
+                await alertSuccess(`${data.message} Selamat datang.`)
                 sessionStorage.setItem('is_unlocked_about', 'true')
                 setIsUnlocked(true)
             } else {

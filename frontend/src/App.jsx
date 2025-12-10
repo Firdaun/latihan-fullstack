@@ -231,7 +231,8 @@ function MessageCard({ title, from, date, createdAt }) {
     }, [createdAt])
 
     return (
-        <div className="bg-white border border-blue-500 shadow-lg h-[217px] flex justify-between flex-col gap-2 rounded-lg transition-all duration-300 hover:shadow-2xl">
+        <div className="bg-white border border-blue-500 relative shadow-lg h-[217px] flex justify-between flex-col gap-2 rounded-lg transition-all duration-300 hover:shadow-2xl">
+            <div className='cursor-pointer text-red-500 absolute right-0'><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg></div>
             <p className="py-1.5 px-3 text-sm text-gray-600">From: {from}</p>
             <p className="p-3 text-center">{title}</p>
             <div className="flex justify-between text-sm text-gray-600 py-1.5 px-3">

@@ -11,9 +11,11 @@ async function validateKey(req, res) {
     if (!key || key !== SECRET_KEY) {
         console.warn(`Percobaan masuk salah: ${key}`);
         return res.status(403).json({ success: false, message: 'Kunci salah atau tidak valid.' });
+    } else {
+        console.log(`Akses diterima dengan kunci: ${key}`);
+        res.status(200).json({ success: true, message: 'Akses diterima!' });
     }
 
-    res.status(200).json({ success: true, message: 'Akses diterima!' });
 }
 
 export const authController = {
