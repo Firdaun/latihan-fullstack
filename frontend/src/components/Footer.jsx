@@ -17,7 +17,7 @@ export default function Footer() {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {componentsFooter.map((column, columnIndex) => (
                             <div key={columnIndex}>
-                                <h3 className="lg:text-lg font-semibold text-white mb-3 lg:mb-4 border-b border-gray-700 pb-2">{column.name}</h3>
+                                <h3 className="lg:text-lg whitespace-nowrap font-semibold text-white mb-3 lg:mb-4 border-b border-gray-700 pb-2">{column.name}</h3>
                                 <nav className="space-y-2 lg:space-y-3">
                                     {column.links.map((link, linkIndex) => (
                                         <a key={linkIndex} href={link.href} className="text-gray-400 hover:text-white block text-sm transition duration-150 ease-in-out">{link.name}</a>
@@ -27,10 +27,8 @@ export default function Footer() {
                         ))}
                         <div>
                             <h3 className="lg:text-lg font-semibold text-white mb-3 lg:mb-4 border-b border-gray-700 pb-2">HUBUNGI KAMI</h3>
-                            <p className="text-gray-400 text-sm mb-2 lg:mb-3">
-                                Alamat: Jl. Sukahening No. 123<br />
-                                Email: fahrulbrrads@gmail.com
-                            </p>
+                            <p className="text-gray-400 text-sm mb-3 lg:mb-3">Alamat: Jl. Sukahening No. 123</p>
+                            <p className="text-gray-400 text-sm mb-3 lg:mb-3">Email: fahrulbrrads@gmail.com</p>
                             <div className="flex">
                                 <a className="text-gray-400 hover:text-white" rel="noopener noreferrer" target="_blank" href="https://x.com/Fahrul7309"><XIcon/></a>
                             </div>

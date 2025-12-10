@@ -162,7 +162,7 @@ function HeroSection() {
                 <h1 className="text-transparent bg-clip-text bg-linear-to-r from-purple-600 via-pink-500 to-yellow-500 text-4xl md:text-5xl font-DMSerif py-20">Welcome to Fahrul's website!</h1>
             </div>
             <h1 className="place mt-5 font-semibold text-2xl md:text-4xl">Message</h1>
-            <div className="lg:h-125 place flex flex-col lg:flex-row border-8 lg:border-20 border-gray-300 rounded-xl mt-5">
+            <div className="lg:h-125 place flex flex-col lg:flex-row border-2 lg:border-2 border-blue-500 rounded-xl mt-5 select-none">
                 <div className="relative lg:w-10/12">
                     <div className='overflow-hidden h-full' ref={emblaRef}>
                         <div className="flex h-full">
@@ -190,25 +190,25 @@ function HeroSection() {
                                 </div>
                             )))}
                         </div>
-                        <button onClick={scrollPrev} className='absolute top-1/2 left-0 transform -translate-y-1/2 bg-white opacity-70 p-1.5 rounded-full z-10 shadow-md border'>&lt;</button>
-                        <button onClick={scrollNext} className='absolute top-1/2 right-0 transform -translate-y-1/2 bg-white opacity-70 p-1.5 rounded-full z-10 shadow-md border'>&gt;</button>
+                        <button onClick={scrollPrev} className='absolute top-1/2 left-0 transform -translate-y-1/2 bg-white p-1.5 rounded-full z-10 border-2 border-blue-500'>&lt;</button>
+                        <button onClick={scrollNext} className='absolute top-1/2 right-0 transform -translate-y-1/2 bg-white p-1.5 rounded-full z-10 border-2 border-blue-500'>&gt;</button>
                     </div>
                 </div>
 
 
-                <div className="relative wrap-break-word lg:border-l-20 border-gray-300 lg:w-1/3">
+                <div className="relative wrap-break-word lg:border-l-2 border-blue-500 lg:w-1/3">
                     <div>
-                        <textarea onKeyDown={handleNameKeyDown} ref={nameInputRef} className='focus:outline-none resize-none w-full p-4 border-gray-300 lg:border-y-0 border-y-8 lg:border-b-20' placeholder="Masukkan nama" id="input-name" value={newName} onChange={(e) => setNewName(e.target.value)}></textarea>
+                        <textarea onKeyDown={handleNameKeyDown} ref={nameInputRef} className='focus:outline-none resize-none w-full p-4 border-blue-500 lg:border-y-0 border-y-2 lg:border-b-2' placeholder="Masukkan nama" id="input-name" value={newName} onChange={(e) => setNewName(e.target.value)}></textarea>
                     </div>
                     <textarea onKeyDown={handleMessageKeyDown} ref={messageInputRef} className="focus:outline-none w-full p-4 h-50 resize-none" placeholder="Masukkan pesan di sini..." id="input-title" value={newTitle} onChange={(e) => setNewTitle(e.target.value)}></textarea>
-                    <button disabled={isSending} onClick={sendMessage} className={`${isSending ? 'opacity-80 bg-blue-300 cursor-not-allowed' : 'bg-blue-300 active:scale-90 hover:shadow-lg hover:cursor-pointer'} transition-transform duration-150 absolute w-15 h-15 right-0 bottom-0 rounded-full flex justify-center items-center`}>
+                    <button disabled={isSending} onClick={sendMessage} className={`${isSending ? 'opacity-80 bg-blue-500 cursor-not-allowed' : 'bg-blue-500 active:scale-90 hover:shadow-lg hover:cursor-pointer'} transition-transform duration-150 absolute w-15 h-15 right-0 bottom-0 rounded-full flex justify-center items-center`}>
                         {isSending ? (
                             <svg className="animate-spin h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                             </svg>
                         ) : (
-                            <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="#000000" viewBox="0 0 256 256"><path d="M231.87,114l-168-95.89A16,16,0,0,0,40.92,37.34L71.55,128,40.92,218.67A16,16,0,0,0,56,240a16.15,16.15,0,0,0,7.93-2.1l167.92-96.05a16,16,0,0,0,.05-27.89ZM56,224a.56.56,0,0,0,0-.12L85.74,136H144a8,8,0,0,0,0-16H85.74L56.06,32.16A.46.46,0,0,0,56,32l168,95.83Z"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="#ffffff" viewBox="0 0 256 256"><path d="M231.87,114l-168-95.89A16,16,0,0,0,40.92,37.34L71.55,128,40.92,218.67A16,16,0,0,0,56,240a16.15,16.15,0,0,0,7.93-2.1l167.92-96.05a16,16,0,0,0,.05-27.89ZM56,224a.56.56,0,0,0,0-.12L85.74,136H144a8,8,0,0,0,0-16H85.74L56.06,32.16A.46.46,0,0,0,56,32l168,95.83Z"></path></svg>
 
                         )}
                     </button>
@@ -231,7 +231,7 @@ function MessageCard({ title, from, date, createdAt }) {
     }, [createdAt])
 
     return (
-        <div className="bg-blue-100 shadow-lg h-50 flex justify-between flex-col gap-2 rounded-xl transition-all duration-300 hover:shadow-2xl">
+        <div className="bg-white border border-blue-500 shadow-lg h-[217px] flex justify-between flex-col gap-2 rounded-lg transition-all duration-300 hover:shadow-2xl">
             <p className="py-1.5 px-3 text-sm text-gray-600">From: {from}</p>
             <p className="p-3 text-center">{title}</p>
             <div className="flex justify-between text-sm text-gray-600 py-1.5 px-3">
@@ -274,7 +274,7 @@ function Deskripsi() {
                 </h2>
 
                 <section className="lg:w-4xl lg:mx-auto bg-white lg:p-10 rounded-xl lg:shadow-2xl">
-                    <h3 className="text-lg md:text-2xl lg:text-3xl font-semibold mb-6 border-b-2 pb-2 text-blue-600 flex items-center">
+                    <h3 className="text-lg md:text-2xl lg:text-3xl font-semibold mb-6 border-b-2 pb-2 text-blue-500 flex items-center">
                         <span role="img" aria-label="globe" className="mr-3">🌐</span> Deskripsi Fitur Pesan
                     </h3>
                     <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed">

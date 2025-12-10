@@ -12,6 +12,6 @@
     @apply w-[90%] max-w-7xl m-auto
   }
   .nav {
-    @apply bg-blue-300 backdrop-blur-md fixed right-0 left-0 top-0 z-20 flex rounded-b-2xl py-5
+    @apply bg-white/70 backdrop-blur-md fixed right-0 left-0 top-0 z-20 flex rounded-b-2xl py-5
   }
 }
