@@ -1,6 +1,8 @@
 import useEmblaCarousel from 'embla-carousel-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { alertError } from './components/data/alert'
+import { alertConfirm, alertError, alertSuccess } from './components/data/alert'
+import { useAdmin } from './context/AdminContext'
+import Swal from 'sweetalert2'
 
 const API_URL = import.meta.env.VITE_API_URL + '/messages'
 
@@ -43,6 +45,7 @@ function HeroSection() {
     const [itemsPerGroup, setItemsPerGroup] = useState(4)
     const messageInputRef = useRef(null)
     const nameInputRef = useRef(null)
+    const { isAdmin, adminKey } = useAdmin()
 
     useEffect(() => {
         const handleResize = () => {
@@ -120,7 +123,7 @@ function HeroSection() {
     }
 
     const handleNameKeyDown = (e) => {
-        if(e.key === 'Enter' || e.key === 'ArrowDown'){
+        if (e.key === 'Enter' || e.key === 'ArrowDown') {
             e.preventDefault()
             messageInputRef.current?.focus()
         }
@@ -155,6 +158,32 @@ function HeroSection() {
     const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi])
     const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi])
 
+    const handleDeleteMessage = async (id) => {
+        const result = await alertConfirm('Ingin menghapus pesan ini?', 'Delete Message')
+        if (result.isConfirmed) {
+
+            try {
+                const response = await fetch(`${API_URL}/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-admin-key': adminKey
+                    }
+                })
+
+                if (response.ok) {
+                    await alertSuccess('Pesan di hapus.')
+                    setMessages(prev => prev.filter(msg => msg.id !== id))
+                } else {
+                    const data = await response.json()
+                    alertError(data.error || 'Gagal menghapus pesan')
+                }
+            } catch (error) {
+                console.error("Delete error:", error)
+                alertError('Terjadi kesalahan jaringan.')
+            }
+        }
+    }
 
     return (
         <>
@@ -168,7 +197,7 @@ function HeroSection() {
                         <div className="flex h-full">
                             {groupedMessages.length === 0 && !isLoading ? (
                                 <div className='shrink-0 grow-0 basis-full py-5 px-7 min-w-0'>
-                                    <p className="text-center text-gray-500">No messages yet. Be the first to post!</p>
+                                    <p className="text-center text-gray-500">Belum ada pesan. Jadilah yang pertama!</p>
                                 </div>
                             ) : (groupedMessages.map((slideGroup, slideIndex) => (
                                 <div key={slideIndex} className='shrink-0 grow-0 basis-full py-5 px-7 min-w-0'>
@@ -176,9 +205,12 @@ function HeroSection() {
                                         {slideGroup.map((message, messageIndex) => (
                                             <MessageCard
                                                 key={message.id || messageIndex}
+                                                id={message.id}
                                                 title={message.title}
                                                 from={message.from}
                                                 createdAt={message.createdAt || message.date}
+                                                isAdmin={isAdmin}
+                                                onDelete={() => handleDeleteMessage(message.id)}
                                                 date={new Date(message.createdAt || message.date).toLocaleDateString('id-ID', {
                                                     day: '2-digit',
                                                     month: '2-digit',
@@ -209,7 +241,6 @@ function HeroSection() {
                             </svg>
                         ) : (
                             <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="#ffffff" viewBox="0 0 256 256"><path d="M231.87,114l-168-95.89A16,16,0,0,0,40.92,37.34L71.55,128,40.92,218.67A16,16,0,0,0,56,240a16.15,16.15,0,0,0,7.93-2.1l167.92-96.05a16,16,0,0,0,.05-27.89ZM56,224a.56.56,0,0,0,0-.12L85.74,136H144a8,8,0,0,0,0-16H85.74L56.06,32.16A.46.46,0,0,0,56,32l168,95.83Z"></path></svg>
-
                         )}
                     </button>
                 </div>
@@ -218,7 +249,7 @@ function HeroSection() {
     )
 }
 
-function MessageCard({ title, from, date, createdAt }) {
+function MessageCard({ title, from, date, createdAt, isAdmin, onDelete }) {
 
     const [timeAgoText, setTimeAgoText] = useState(() => formatTimeAgo(createdAt))
 
@@ -232,7 +263,9 @@ function MessageCard({ title, from, date, createdAt }) {
 
     return (
         <div className="bg-white border border-blue-500 relative shadow-lg h-[217px] flex justify-between flex-col gap-2 rounded-lg transition-all duration-300 hover:shadow-2xl">
-            <div className='cursor-pointer text-red-500 absolute right-0'><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg></div>
+            {isAdmin && (
+                <button onClick={onDelete} className='active:scale-110 cursor-pointer text-red-500 absolute right-0'><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg></button>
+            )}
             <p className="py-1.5 px-3 text-sm text-gray-600">From: {from}</p>
             <p className="p-3 text-center">{title}</p>
             <div className="flex justify-between text-sm text-gray-600 py-1.5 px-3">

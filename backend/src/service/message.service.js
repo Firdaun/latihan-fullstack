@@ -1,9 +1,9 @@
-import "dotenv/config";
-import { PrismaMariaDb } from '@prisma/adapter-mariadb';
-import * as Prisma from '@prisma/client'; 
-const { PrismaClient } = Prisma;
+import "dotenv/config"
+import { PrismaMariaDb } from '@prisma/adapter-mariadb'
+import * as Prisma from '@prisma/client' 
+const { PrismaClient } = Prisma
 
-const isLocalhost = process.env.DATABASE_HOST === 'localhost' || process.env.DATABASE_HOST === '127.0.0.1';
+const isLocalhost = process.env.DATABASE_HOST === 'localhost' || process.env.DATABASE_HOST === '127.0.0.1'
 
 const adapter = new PrismaMariaDb({
     host: process.env.DATABASE_HOST,
@@ -12,10 +12,10 @@ const adapter = new PrismaMariaDb({
     database: process.env.DATABASE_NAME,
     connectionLimit: 5,
     ssl: isLocalhost ? undefined : { rejectUnauthorized: true }
-});
+})
 
 
-const prisma = new PrismaClient({ adapter });
+const prisma = new PrismaClient({ adapter })
 
 async function getAllMessages() {
     return prisma.messages.findMany({
@@ -47,10 +47,19 @@ async function createNewMessage(from, title) {
     })
 }
 
+async function deleteMessage(id) {
+    return prisma.messages.delete({
+        where: {
+            id: parseInt(id)
+        }
+    })
+}
+
 export const messageService = {
     getAllMessages,
     createNewMessage,
-    getGlobalMessageCountToday
+    getGlobalMessageCountToday,
+    deleteMessage
 }
 
-export const db = prisma;
+export const db = prisma

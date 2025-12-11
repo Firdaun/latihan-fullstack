@@ -21,6 +21,7 @@ export const alertSuccess = async (message) => {
         timer: 900,
         scrollbarPadding: false,
         heightAuto: false,
+        returnFocus: false,
         didOpen: lockScroll,
         willClose: unlockScroll
     })
@@ -34,7 +35,25 @@ export const alertError = async (message) => {
         confirmButtonColor: '#00a7f2',
         scrollbarPadding: false,
         heightAuto: false,
+        returnFocus: false,
         didOpen: lockScroll,
         willClose: unlockScroll
     })
 }
+
+export const alertConfirm = async (message, title) => {
+    return Swal.fire({
+        title: title,
+        text: message,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'yes',
+        scrollbarPadding: false,
+        heightAuto: false,
+        returnFocus: false,
+        didOpen: lockScroll,
+        willClose: unlockScroll
+    })
+} 
