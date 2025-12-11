@@ -130,7 +130,7 @@ export default function Navbar() {
             </nav>
             {showModal && (
                 <div onClick={() => setShowModal(false)} className="fixed bg-black/50 backdrop-blur-sm min-h-screen z-9999 w-screen flex justify-center items-center inset-0">
-                    <form onSubmit={handleLoginSubmit} onClick={(e) => e.stopPropagation()} className="bg-white relative max-w-2xl p-10  shadow-xl rounded-2xl border border-blue-200 transform transition-all duration-500">
+                    <form onSubmit={handleLoginSubmit} onClick={(e) => e.stopPropagation()} className="bg-white relative place p-10  shadow-xl rounded-2xl border border-blue-200 transform transition-all duration-500">
                         <div onClick={() => setShowModal(false)} className="hover:scale-110 transition-transform text-red-500 absolute right-3 top-3 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg></div>
                         <div className="text-center mb-5">
                             <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-5 border border-blue-300">
