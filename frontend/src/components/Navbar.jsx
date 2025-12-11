@@ -131,20 +131,20 @@ export default function Navbar() {
             {showModal && (
                 <div onClick={() => setShowModal(false)} className="fixed inset-0 z-9999 overflow-y-auto bg-black/50 backdrop-blur-sm">
                     <div className="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-                        <form onSubmit={handleLoginSubmit} onClick={(e) => e.stopPropagation()} className="bg-white relative w-full max-w-85 md:max-w-2xl p-8  shadow-xl rounded-2xl border border-blue-200 transform transition-all duration-500">
+                        <form onSubmit={handleLoginSubmit} onClick={(e) => e.stopPropagation()} className="bg-white relative w-full max-w-85 md:max-w-2xl p-6  shadow-xl rounded-2xl border border-blue-200 transform transition-all duration-500">
                             <div onClick={() => setShowModal(false)} className="hover:scale-110 transition-transform text-red-500 absolute right-3 top-3 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg></div>
                             <div className="text-center mb-5 md:mb-10">
                                 <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4 border border-blue-300">
                                     🔒 Akses Di Kunci
                                 </span>
                                 <h1 className="text-3xl font-extrabold md:text-4xl mb-4">Mode admin</h1>
-                                <h2 className="md:text-lg lg:text-xl text-gray-700 font-medium">
+                                <h2 className="text-sm md:text-lg lg:text-xl text-gray-700 font-medium">
                                     Masukkan secret key di bawah ini untuk membuka akses
                                 </h2>
                             </div>
                             <div className="flex justify-center">
                                 <div className="flex w-full max-w-sm rounded-xl overflow-hidden shadow-lg border border-blue-500">
-                                    <input ref={inputRef} onChange={(e) => setInputKey(e.target.value)} value={inputKey} type="password" placeholder="Ketik secret key di sini..." className="grow p-4 text-base md:text-lg focus:outline-none bg-white text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 transition duration-300" />
+                                    <input ref={inputRef} onChange={(e) => setInputKey(e.target.value)} value={inputKey} type="password" placeholder="Ketik key di sini..." className="grow min-w-42 p-4 text-base md:text-lg focus:outline-none bg-white text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 transition duration-300" />
                                     <button title="Buka Kunci Akses" type="submit" className="cursor-pointer group flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white p-4 transition duration-300 ease-in-out transform" >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"

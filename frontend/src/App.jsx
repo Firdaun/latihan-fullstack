@@ -324,8 +324,8 @@ function Deskripsi() {
                             return (
                                 <li key={index} className="flex">
                                     <span className="text-blue-500 font-bold mr-3 mt-1">✓</span>
-                                    <div>
-                                        <p className="font-semibold text-base">{components.name}</p>
+                                    <div className='text-sm md:text-base'>
+                                        <p className="font-semibold">{components.name}</p>
                                         <p>{components.desc}</p>
                                         {components.desc2}
                                     </div>
