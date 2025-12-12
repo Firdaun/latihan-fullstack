@@ -287,7 +287,7 @@ function Deskripsi() {
             name: 'Tampilan Pesan (Embla Carousel):',
             desc: 'Pesan yang sudah terkirim akan ditampilkan dalam format kartu (`MessageCard`) yang menarik dan mudah dibaca. Pesan dikelompokkan menjadi slide berisi maksimal 4 pesan per slide, diorganisir menggunakan library Embla Carousel.',
             desc2: (
-                <p className="mt-1 text-sm italic text-gray-600">Pengunjung dapat menavigasi pesan menggunakan tombol panah `&lt;` dan `&gt;`. Carousel diatur dalam mode loop sehingga navigasi dapat berputar tanpa akhir.</p>
+                <p className="mt-1 text-sm italic text-gray-600">Pengunjung dapat menavigasi pesan menggunakan tombol panah `&lt;` dan `&gt;`. Carousel diatur dalam mode loop: false sehingga navigasi tidak dapat berputar tanpa akhir.</p>
             )
         },
         {

@@ -5,6 +5,7 @@
 @theme {
   --font-DMSerif: "DM Serif Display", sans-serif;
   --font-RobotoSlab: "Roboto Slab", sans-serif;
+  --breakpoint-xs: 450px;
 }
 
 @layer components {
