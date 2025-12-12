@@ -112,7 +112,7 @@ export default function ProtectedAbout() {
                                     value={key}
                                     onChange={(e) => setKey(e.target.value)}
                                     placeholder="Ketik secret key..."
-                                    className="grow p-4 text-base md:text-lg focus:outline-none bg-white text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 transition duration-300"
+                                    className="grow p-4 min-w-42 text-base md:text-lg focus:outline-none bg-white text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 transition duration-300"
                                 />
                                 <button
                                     disabled={isLoading}
