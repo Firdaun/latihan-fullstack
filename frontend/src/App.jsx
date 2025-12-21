@@ -2,17 +2,13 @@ import useEmblaCarousel from 'embla-carousel-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { alertConfirm, alertError, alertSuccess } from './components/data/alert'
 import { useAdmin } from './context/AdminContext'
-import Swal from 'sweetalert2'
-
+import { featurePage } from './components/data/featurepage.data'
 const API_URL = import.meta.env.VITE_API_URL + '/messages'
-
 function formatTimeAgo(timestamp) {
     if (!timestamp) return 'Just now'
-
     const now = new Date()
     const past = new Date(timestamp)
     const diffInSeconds = Math.floor((now - past) / 1000)
-
     if (diffInSeconds < 60) {
         return 'Just now'
     } else if (diffInSeconds < 3600) {
@@ -26,7 +22,6 @@ function formatTimeAgo(timestamp) {
         return `${days} day${days > 1 ? 's' : ''} ago`
     }
 }
-
 export default function Apps() {
     return (
         <>
@@ -35,7 +30,6 @@ export default function Apps() {
         </>
     )
 }
-
 function HeroSection() {
     const [messages, setMessages] = useState([])
     const [newName, setNewName] = useState('')
@@ -46,7 +40,6 @@ function HeroSection() {
     const messageInputRef = useRef(null)
     const nameInputRef = useRef(null)
     const { isAdmin, adminKey } = useAdmin()
-
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth < 768) {
@@ -55,14 +48,10 @@ function HeroSection() {
                 setItemsPerGroup(4)
             }
         }
-
         handleResize()
-
         window.addEventListener('resize', handleResize)
-
         return () => window.removeEventListener('resize', handleResize)
     }, [])
-
     const fetchMessages = useCallback(async () => {
         setIsLoading(true)
         try {
@@ -78,24 +67,19 @@ function HeroSection() {
             setIsLoading(false)
         }
     }, [])
-
     useEffect(() => {
         fetchMessages()
     }, [fetchMessages])
-
     const sendMessage = async () => {
         if (!newName.trim() || !newTitle.trim()) {
             alertError('Nama dan pesan tidak boleh kosong!')
             return
         }
-
         setIsSending(true)
-
         const messageData = {
             from: newName.trim(),
             title: newTitle.trim(),
         }
-
         try {
             const response = await fetch(API_URL, {
                 method: 'POST',
@@ -121,26 +105,22 @@ function HeroSection() {
             setIsSending(false)
         }
     }
-
     const handleNameKeyDown = (e) => {
         if (e.key === 'Enter' || e.key === 'ArrowDown') {
             e.preventDefault()
             messageInputRef.current?.focus()
         }
     }
-
     const handleMessageKeyDown = (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault()
             sendMessage()
         }
-
         if (e.key === 'ArrowUp') {
             e.preventDefault()
             nameInputRef.current?.focus()
         }
     }
-
     const groupedMessages = []
     if (isLoading) {
         groupedMessages.push([{ from: "System", title: "Loading messages...", date: new Date().toISOString(), createdAt: new Date().toISOString() }])
@@ -149,19 +129,15 @@ function HeroSection() {
             groupedMessages.push(messages.slice(i, i + itemsPerGroup))
         }
     }
-
     const [emblaRef, emblaApi] = useEmblaCarousel({
         loop: false,
         align: 'start',
     })
-
     const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi])
     const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi])
-
     const handleDeleteMessage = async (id) => {
         const result = await alertConfirm('Ingin menghapus pesan ini?', 'Delete Message')
         if (result.isConfirmed) {
-
             try {
                 const response = await fetch(`${API_URL}/${id}`, {
                     method: 'DELETE',
@@ -170,7 +146,6 @@ function HeroSection() {
                         'x-admin-key': adminKey
                     }
                 })
-
                 if (response.ok) {
                     await alertSuccess('Pesan di hapus.')
                     setMessages(prev => prev.filter(msg => msg.id !== id))
@@ -184,7 +159,6 @@ function HeroSection() {
             }
         }
     }
-
     return (
         <>
             <div className="flex flex-col bg-blue-50 items-center justify-center text-center pt-18 md:pt-20 gap-5">
@@ -226,8 +200,6 @@ function HeroSection() {
                         <button onClick={scrollNext} className='absolute top-1/2 right-0 transform -translate-y-1/2 bg-white p-1.5 rounded-full z-10 border-2 border-blue-500'>&gt;</button>
                     </div>
                 </div>
-
-
                 <div className="relative wrap-break-word lg:border-l-2 border-blue-500 lg:w-1/3">
                     <div>
                         <textarea onKeyDown={handleNameKeyDown} ref={nameInputRef} className='focus:outline-none resize-none w-full p-4 border-blue-500 lg:border-y-0 border-y-2 lg:border-b-2' placeholder="Masukkan nama" id="input-name" value={newName} onChange={(e) => setNewName(e.target.value)}></textarea>
@@ -248,19 +220,14 @@ function HeroSection() {
         </>
     )
 }
-
 function MessageCard({ title, from, date, createdAt, isAdmin, onDelete }) {
-
     const [timeAgoText, setTimeAgoText] = useState(() => formatTimeAgo(createdAt))
-
     useEffect(() => {
         const interval = setInterval(() => {
             setTimeAgoText(formatTimeAgo(createdAt))
         }, 60000)
-
         return () => clearInterval(interval)
     }, [createdAt])
-
     return (
         <div className="bg-white border border-blue-500 relative shadow-lg h-[217px] flex justify-between flex-col gap-2 rounded-lg transition-all duration-300 hover:shadow-2xl">
             {isAdmin && (
@@ -275,38 +242,13 @@ function MessageCard({ title, from, date, createdAt, isAdmin, onDelete }) {
         </div>
     )
 }
-
 function Deskripsi() {
-
-    const components = [
-        {
-            name: 'Pengiriman Pesan (Form Interaktif):',
-            desc: 'Pengunjung dapat dengan mudah mengirim pesan dengan mengisi Nama dan Isi Pesan melalui formulir input yang intuitif. Sistem akan memvalidasi pesan, memastikan Nama dan Pesan tidak kosong sebelum dikirim.'
-        },
-        {
-            name: 'Tampilan Pesan (Embla Carousel):',
-            desc: 'Pesan yang sudah terkirim akan ditampilkan dalam format kartu (`MessageCard`) yang menarik dan mudah dibaca. Pesan dikelompokkan menjadi slide berisi maksimal 4 pesan per slide, diorganisir menggunakan library Embla Carousel.',
-            desc2: (
-                <p className="mt-1 text-sm italic text-gray-600">Pengunjung dapat menavigasi pesan menggunakan tombol panah `&lt;` dan `&gt;`. Carousel diatur dalam mode loop: false sehingga navigasi tidak dapat berputar tanpa akhir.</p>
-            )
-        },
-        {
-            name: 'Informasi Detail Pesan:',
-            desc: 'Setiap kartu pesan menampilkan: Nama Pengirim, Isi Pesan, Tanggal Pesan dalam format lokal (misal: DD/MM/YYYY), dan Waktu Relatif yang diperbarui secara berkala (misal: "Just now", "5 minutes ago").'
-        },
-        {
-            name: 'Pengambilan Data Asinkron:',
-            desc: 'Data pesan diambil dari endpoint secara asinkron (menggunakan `fetchMessages`), memastikan user interface tetap responsif selama proses pemuatan data. Terdapat indikator loading yang akan muncul saat data pesan sedang dimuat.'
-        },
-    ]
-
     return (
         <>
             <div className="place py-10 px-0 lg:px-8">
                 <h2 className="text-2xl lg:text-4xl font-bold text-center mb-10 text-gray-800">
                     About This Page
                 </h2>
-
                 <section className="lg:w-4xl lg:mx-auto bg-white lg:p-10 rounded-xl lg:shadow-2xl">
                     <h3 className="text-lg md:text-2xl lg:text-3xl font-semibold mb-6 border-b-2 pb-2 text-blue-500 flex items-center">
                         <span role="img" aria-label="globe" className="mr-3">🌐</span> Deskripsi Fitur Pesan
@@ -314,20 +256,18 @@ function Deskripsi() {
                     <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed">
                         Fitur pesan ini dirancang untuk memungkinkan pengunjung website berinteraksi secara langsung dengan meninggalkan komentar, testimoni, atau pesan singkat lainnya, menciptakan nuansa komunitas yang interaktif di halaman utama.
                     </p>
-
                     <h4 className="text-lg md:text-2xl font-bold mb-4 text-gray-800 flex items-center">
                         <span role="img" aria-label="sparkles" className="mr-2 text-yellow-500">✨</span> Fungsionalitas Utama:
                     </h4>
-
                     <ul className="text-gray-700 space-y-9">
-                        {components.map((components, index) => {
+                        {featurePage.map((featurePage, index) => {
                             return (
                                 <li key={index} className="flex">
                                     <span className="text-blue-500 font-bold mr-3 mt-1">✓</span>
                                     <div className='text-sm md:text-base'>
-                                        <p className="font-semibold">{components.name}</p>
-                                        <p>{components.desc}</p>
-                                        {components.desc2}
+                                        <p className="font-semibold">{featurePage.name}</p>
+                                        <p>{featurePage.desc}</p>
+                                        {featurePage.desc2}
                                     </div>
                                 </li>
                             )
