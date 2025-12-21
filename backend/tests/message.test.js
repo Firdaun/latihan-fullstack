@@ -44,7 +44,7 @@ describe('Message API Endpoint', () => {
     })
 
     it('should return all messages via GET /messages', async () => {
-        await db.message.create({
+        await db.messages.create({
             data: { from: 'User A', title: 'First Message' }
         })
         const response = await request(app)

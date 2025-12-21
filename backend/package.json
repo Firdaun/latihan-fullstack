@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles",
+    "test": "vitest run",
     "start": "node src/main.js",
     "postinstall": "prisma generate"
   },
@@ -19,8 +19,8 @@
     "express": "^5.1.0"
   },
   "devDependencies": {
-    "jest": "^30.2.0",
     "prisma": "^7.0.1",
-    "supertest": "^7.1.4"
+    "supertest": "^7.1.4",
+    "vitest": "^4.0.16"
   }
 }
