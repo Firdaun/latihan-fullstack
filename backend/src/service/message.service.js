@@ -3,7 +3,7 @@ import { PrismaMariaDb } from '@prisma/adapter-mariadb'
 import * as Prisma from '@prisma/client' 
 const { PrismaClient } = Prisma
 
-const isLocalhost = process.env.DATABASE_HOST === 'localhost' || process.env.DATABASE_HOST === '127.0.0.1'
+const isProduction = process.env.NODE_ENV === 'production'
 
 const adapter = new PrismaMariaDb({
     host: process.env.DATABASE_HOST,
@@ -11,7 +11,7 @@ const adapter = new PrismaMariaDb({
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE_NAME,
     connectionLimit: 5,
-    // ssl: isLocalhost ? undefined : { rejectUnauthorized: true }
+    ssl: { rejectUnauthorized: isProduction }
 })
 
 
