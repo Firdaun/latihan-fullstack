@@ -80,7 +80,7 @@ export default function ProtectedAbout() {
 
     return (
         <>
-            <About />
+            <About locked={isUnlocked} />
 
             {!isUnlocked && (
                 <div className="fixed backdrop-blur-sm inset-0 bg-black/70 z-9999 w-screen h-screen flex justify-center items-center">

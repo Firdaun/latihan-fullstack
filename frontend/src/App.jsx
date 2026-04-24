@@ -32,14 +32,21 @@ export default function Apps() {
 }
 function HeroSection() {
     const [messages, setMessages] = useState([])
-    const [newName, setNewName] = useState('')
-    const [newTitle, setNewTitle] = useState('')
+    const [newForm, setNewForm] = useState({
+        name: '',
+        message: ''
+    })
     const [isSending, setIsSending] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [itemsPerGroup, setItemsPerGroup] = useState(4)
     const messageInputRef = useRef(null)
     const nameInputRef = useRef(null)
     const { isAdmin, adminKey } = useAdmin()
+
+    const handleChange = (e) => {
+        setNewForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
+    }
+
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth < 768) {
@@ -71,28 +78,29 @@ function HeroSection() {
         fetchMessages()
     }, [fetchMessages])
     const sendMessage = async () => {
-        if (!newName.trim() || !newTitle.trim()) {
+        if (!newForm) {
             alertError('Nama dan pesan tidak boleh kosong!')
             return
         }
-        setIsSending(true)
-        const messageData = {
-            from: newName.trim(),
-            title: newTitle.trim(),
+        const cleanData = {
+            from: newForm.name.trim(),
+            title: newForm.message.trim()
         }
+        setIsSending(true)
         try {
             const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(messageData),
+                body: JSON.stringify(cleanData),
             })
             if (response.ok) {
                 const savedMessage = await response.json()
                 setMessages(prevMessages => [savedMessage, ...prevMessages])
-                setNewName('')
-                setNewTitle('')
+
+                setNewForm({ 'name': '', 'message': '' })
+
                 nameInputRef.current?.focus()
             } else {
                 const errorData = await response.json()
@@ -201,10 +209,26 @@ function HeroSection() {
                     </div>
                 </div>
                 <div className="relative wrap-break-word lg:border-l-2 border-blue-500 lg:w-1/3">
-                    <div>
-                        <textarea onKeyDown={handleNameKeyDown} ref={nameInputRef} className='focus:outline-none resize-none w-full p-4 border-blue-500 lg:border-y-0 border-y-2 lg:border-b-2' placeholder="Masukkan nama" id="input-name" value={newName} onChange={(e) => setNewName(e.target.value)}></textarea>
-                    </div>
-                    <textarea onKeyDown={handleMessageKeyDown} ref={messageInputRef} className="focus:outline-none w-full p-4 h-50 resize-none" placeholder="Masukkan pesan di sini..." id="input-title" value={newTitle} onChange={(e) => setNewTitle(e.target.value)}></textarea>
+                        <textarea
+                            onKeyDown={handleNameKeyDown}
+                            ref={nameInputRef}
+                            placeholder="Masukkan nama"
+                            id="input-name"
+                            name='name'
+                            value={newForm.name}
+                            onChange={handleChange}
+                            className='focus:outline-none resize-none w-full p-4 border-blue-500 lg:border-y-0 border-y-2 lg:border-b-2'
+                        />
+                    <textarea
+                        onKeyDown={handleMessageKeyDown}
+                        ref={messageInputRef}
+                        placeholder="Masukkan pesan di sini..."
+                        id="input-title"
+                        name='message'
+                        value={newForm.message}
+                        onChange={handleChange}
+                        className="focus:outline-none w-full p-4 h-50 resize-none"
+                    />
                     <button disabled={isSending} onClick={sendMessage} className={`${isSending ? 'opacity-80 bg-blue-500 cursor-not-allowed' : 'bg-blue-500 active:scale-90 hover:shadow-lg hover:cursor-pointer'} transition-transform duration-150 absolute w-15 h-15 right-0 bottom-0 rounded-full flex justify-center items-center`}>
                         {isSending ? (
                             <svg className="animate-spin h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
