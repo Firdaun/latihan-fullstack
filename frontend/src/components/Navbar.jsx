@@ -120,6 +120,7 @@ export default function Navbar() {
                         </ul>
                         <div
                             onClick={handleAccessClick}
+                            title="alt + shift + a"
                             className={`px-5 py-1 ${isAdmin ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-400'} text-white rounded-md cursor-pointer transition-all duration-300 ease-in-out`}>
                             {isAdmin ? 'Admin' : 'Access'}
                         </div>
